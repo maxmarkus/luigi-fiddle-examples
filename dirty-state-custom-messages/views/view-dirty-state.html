@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <link href="https://unpkg.com/fundamental-styles/dist/fundamental-styles.css" rel="stylesheet">
+  <script src="https://unpkg.com/@luigi-project/client@next/luigi-client.js"></script>
+  <style>
+    html,
+    body {
+      position: relative;
+    }
+
+    #imgCnt img {
+      width: 100%;
+    }
+
+    #imgCnt {
+      text-align: center;
+    }
+
+    #textCnt {
+      padding: 30px;
+      text-align: center;
+      font-family: '72', sans-serif;
+      visibility: hidden;
+    }
+
+    #textCnt.visible {
+      visibility: visible;
+    }
+
+    #textCnt .text-left {
+      text-align: left;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body style="-webkit-font-smoothing: antialiased; color: #515559;">
+  <div id="imgCnt"></div>
+  <div id="textCnt">
+    <h1 id="title">Multi purpose demo page</h1>
+    <p id="content">Some content</p>
+
+    <div class="text-left">
+      <ul>
+        <li><a href="javascript:LuigiClient.linkManager().navigate('/help');">Click here</a> to navigate with LuigiClient to /help</li>
+        <li><a href="javascript:navigateWithCustomMessage('/help');">Click here </a> to send a custom message to Core, which <br>
+                                                              asks if you want to navigate to /help, removes dirty state<br>
+                                                              and triggers a core navigation function to go there.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function navigateWithCustomMessage(path) {
+      const settings = {
+        header: "Confirmation",
+        body: `Do you want to navigate to ${path}?`,
+        buttonConfirm: "Yes",
+        buttonDismiss: "No"
+      };
+      LuigiClient
+        .uxManager()
+        .showConfirmationModal(settings)
+        .then(() => {
+          // confirmed truthy
+          console.log('confirmed YES, remove dirty status and send custom msg to navigate to', path);
+          LuigiClient.uxManager().setDirtyStatus(false);
+          LuigiClient.sendCustomMessage({id: 'my.navigate-to', path: path})
+        })
+        .catch(e => { 
+          // confirmed falsy
+          console.log('confirmed NO, do not do anything');
+         });
+    }
+
+    function updateFn(context) {
+      // SET INITIAL DIRTY STATE
+      LuigiClient.uxManager().setDirtyStatus(true);
+
+
+      if (context.title) {
+        document.getElementById("title").innerHTML = context.title;
+      }
+      if (context.content) {
+        document.getElementById("content").innerHTML = context.content;
+      }
+      if (context.imgUrl) {
+        var iwidth = !isNaN(context.imgWidth) ? "width: " + context.imgWidth + "px" : "";
+        document.getElementById("imgCnt").innerHTML = "<img src='" + context.imgUrl + "' style='" + iwidth + "; margin-top: " + (context.imgTopMargin ? '5' : '') + "0px'>";
+      }
+      document.getElementById("textCnt").classList.add("visible");
+
+    }
+    LuigiClient.addInitListener(updateFn);
+    LuigiClient.addContextUpdateListener(updateFn);
+
+    // fallback visibility if no initlistener called for 3 seconds
+    setTimeout(function () {
+      document.getElementById("textCnt").classList.add("visible");
+    }, 3000);
+
+  </script>
+</body>
+</html>

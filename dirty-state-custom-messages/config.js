@@ -11,62 +11,23 @@ module.exports = (baseUrl, basePath) => {
                 icon: 'home',
                 viewUrl: baseUrl + basePath + '/views/view-1.html',
                 context: {
-                    title: 'Welcome to my personal github examples!',
-                    content: 'There is some other content'
+                    title: 'Dirty State and custom messages!',
+                    content: 'Click below to navigate to a page that shows dirty state example.'
                 }
             },
             { 
-                pathSegment: 'ui5sc 1', 
-                label: 'Shopping Cart 1', 
-                category:  'UI5 Demo Pages',
-                hideSideNav: true,
-                loadingIndicator: {
-                    enabled: false
+                pathSegment: 'dirty', 
+                label: 'Dirty State', 
+                category:  'Luigi Features',
+                context: {
+                    title: 'Dirty State',
+                    content: 'Try to navigate away from this page.'
                 },
-                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
-            },
-            { 
-                pathSegment: 'ui5sc 2', 
-                label: 'Shopping Cart 2', 
-                category:  'UI5 Demo Pages',
-                hideSideNav: true,
-                loadingIndicator: {
-                    enabled: false
-                },
-                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
-            },
-            { 
-                pathSegment: 'ui5sc 3', 
-                label: 'Shopping Cart 3', 
-                category:  'UI5 Demo Pages',
-                hideSideNav: true,
-                loadingIndicator: {
-                    enabled: false
-                },
-                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
-            },
-            { 
-                pathSegment: 'ui5sc 4', 
-                label: 'Shopping Cart 4', 
-                category:  'UI5 Demo Pages',
-                hideSideNav: true,
-                loadingIndicator: {
-                    enabled: false
-                },
-                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
-            },
-        ] 
-        },{ 
-            pathSegment: 'foo', 
-            label: 'Some Action',
-            icon: 'favorite-list',
-            viewUrl: baseUrl + basePath + '/views/view-1.html',
-            hideSideNav: true,
-            context: {
-                title: 'Left navigation hidden',
-                content: 'for pages needing more space or wanting to handle navigation internally'  
+                viewUrl: baseUrl + basePath + '/views/view-dirty-state.html',
             }
-        },{ 
+        ] 
+    },  
+        { 
             pathSegment: 'help', 
             label: 'Help',
             icon: 'sys-help',
@@ -87,10 +48,18 @@ module.exports = (baseUrl, basePath) => {
     }, 
     settings: { 
         responsiveNavigation: 'semiCollapsible',
-        header: { 
-            // logo: 'img/luigi.png', 
+        header: {
             title: 'Luigi Fiddle'
         } 
-    } 
+    },
+    communication: {
+        customMessagesListeners: {
+            'my.navigate-to': (msg) => {
+                // navigating to msg.path
+                console.log('received my.navigateto', msg);
+                Luigi.navigation().navigate(msg.path);   
+            }
+        }
+    }
   }
 };    

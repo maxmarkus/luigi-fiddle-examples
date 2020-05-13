@@ -1,7 +1,6 @@
 module.exports = (baseUrl) => {
   const storageKey = 'lui-fiddle-custom-selected-example';
-  // const selectedExample = JSON.parse(sessionStorage.getItem(storageKey));
-  const selectedExample = false; // JSON.parse(sessionStorage.getItem(storageKey));
+  const selectedExample = JSON.parse(sessionStorage.getItem(storageKey));
   fetch(baseUrl + 'examples.json')
   .then(res => res.json())
   .then(examples => {
@@ -12,7 +11,7 @@ module.exports = (baseUrl) => {
   function runConfig(example) {
     console.log('runConfig', example);
 
-    // sessionStorage.setItem(storageKey, JSON.stringify(example))
+    sessionStorage.setItem(storageKey, JSON.stringify(example))
     fetch(`${baseUrl}${example.path}/${example.entry}`)
       .then((res) => res.text())
       .then(raw => {
