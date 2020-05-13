@@ -1,4 +1,4 @@
-module.exports = (baseUrl) => {
+module.exports = (baseUrl, basePath) => {
   return {
     navigation: { 
         nodes: [{ 
@@ -9,7 +9,7 @@ module.exports = (baseUrl) => {
                 pathSegment: 'overview', 
                 label: 'Overview', 
                 icon: 'home',
-                viewUrl: baseUrl + 'dirty-state-custom-messages/views/view-1.html',
+                viewUrl: baseUrl + basePath + '/views/view-1.html',
                 context: {
                     title: 'Welcome to my personal github examples!',
                     content: 'There is some other content'
@@ -60,7 +60,7 @@ module.exports = (baseUrl) => {
             pathSegment: 'foo', 
             label: 'Some Action',
             icon: 'favorite-list',
-            viewUrl: baseUrl + 'dirty-state-custom-messages/views/view-1.html',
+            viewUrl: baseUrl + basePath + '/views/view-1.html',
             hideSideNav: true,
             context: {
                 title: 'Left navigation hidden',
@@ -70,7 +70,7 @@ module.exports = (baseUrl) => {
             pathSegment: 'help', 
             label: 'Help',
             icon: 'sys-help',
-            viewUrl: baseUrl + 'dirty-state-custom-messages/views/view-1.html',
+            viewUrl: baseUrl + basePath + '/views/view-1.html',
             context: {
                 title: 'Help Section',
                 content: 'Find some useful links on the left'  

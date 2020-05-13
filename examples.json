@@ -1,10 +1,12 @@
 [
   {
     "name": "Welcome",
-    "entry": "welcome/config.js"
+    "path": "welcome",
+    "entry": "config.js"
   },
   {
     "name": "Dirty State Custom Messages",
-    "entry": "dirty-state-custom-messages/config.js"
+    "path": "dirty-state-custom-messages",
+    "entry": "config.js"
   }
 ]

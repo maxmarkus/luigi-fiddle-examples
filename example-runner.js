@@ -1,6 +1,7 @@
 module.exports = (baseUrl) => {
   const storageKey = 'lui-fiddle-custom-selected-example';
-  const selectedExample = JSON.parse(sessionStorage.getItem(storageKey));
+  // const selectedExample = JSON.parse(sessionStorage.getItem(storageKey));
+  const selectedExample = false; // JSON.parse(sessionStorage.getItem(storageKey));
   fetch(baseUrl + 'examples.json')
   .then(res => res.json())
   .then(examples => {
@@ -9,17 +10,13 @@ module.exports = (baseUrl) => {
   })
 
   function runConfig(example) {
-    // Fallback on index integer
-    // if (typeof example === Number) {
-    //   example = examples[example];
-    // }
     console.log('runConfig', example);
 
-    sessionStorage.setItem(storageKey, JSON.stringify(example))
-    fetch(baseUrl + example.entry)
+    // sessionStorage.setItem(storageKey, JSON.stringify(example))
+    fetch(`${baseUrl}${example.path}/${example.entry}`)
       .then((res) => res.text())
       .then(raw => {
-          const config = eval(raw)(baseUrl);
+          const config = eval(raw)(baseUrl, example.path);
           console.log('config', config);
           Luigi.setConfig(config);
       })
@@ -37,7 +34,7 @@ module.exports = (baseUrl) => {
     let selectedExIndex;
     if (selectedExample) {
       for (let i = 0; i < examples.length; i++) {
-        if(examples[i].entry == selectedExample.entry) {
+        if(examples[i].path == selectedExample.path) {
           selectedExIndex = i;
         }
       }
