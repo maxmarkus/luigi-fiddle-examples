@@ -19,7 +19,7 @@ module.exports = (baseUrl) => {
       })
   }
   // Adds a dropdown and button to load a specific example
-  addExamplesToFiddle(examples) {
+  function addExamplesToFiddle(examples) {
     console.info('Not yet implemented.');
   }
 }
