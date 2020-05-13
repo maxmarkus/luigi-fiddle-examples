@@ -1,5 +1,9 @@
 [
   {
+    "name": "Welcome",
+    "entry": "welcome/config.js"
+  },
+  {
     "name": "Dirty State Custom Messages",
     "entry": "dirty-state-custom-messages/config.js"
   }

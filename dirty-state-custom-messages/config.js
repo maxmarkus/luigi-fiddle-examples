@@ -14,16 +14,48 @@ module.exports = (baseUrl) => {
                     title: 'Welcome to my personal github examples!',
                     content: 'There is some other content'
                 }
-            },{ 
-                pathSegment: 'ui5sc', 
-                label: 'Shopping Cart', 
+            },
+            { 
+                pathSegment: 'ui5sc 1', 
+                label: 'Shopping Cart 1', 
                 category:  'UI5 Demo Pages',
                 hideSideNav: true,
                 loadingIndicator: {
                     enabled: false
                 },
                 viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
-            }] 
+            },
+            { 
+                pathSegment: 'ui5sc 2', 
+                label: 'Shopping Cart 2', 
+                category:  'UI5 Demo Pages',
+                hideSideNav: true,
+                loadingIndicator: {
+                    enabled: false
+                },
+                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
+            },
+            { 
+                pathSegment: 'ui5sc 3', 
+                label: 'Shopping Cart 3', 
+                category:  'UI5 Demo Pages',
+                hideSideNav: true,
+                loadingIndicator: {
+                    enabled: false
+                },
+                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
+            },
+            { 
+                pathSegment: 'ui5sc 4', 
+                label: 'Shopping Cart 4', 
+                category:  'UI5 Demo Pages',
+                hideSideNav: true,
+                loadingIndicator: {
+                    enabled: false
+                },
+                viewUrl: 'https://sapui5.netweaver.ondemand.com/test-resources/sap/m/demokit/cart/webapp/index.html'
+            },
+        ] 
         },{ 
             pathSegment: 'foo', 
             label: 'Some Action',
